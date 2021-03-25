@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <!--
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css">
+    -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
+    <?!= include("css") ?>
+  </head>
+  <body>
+    <div id="app" class="" v-cloak>
+        <div class="row">
+            <div class="col s0 xl1"></div>
+            <div class="col s12 xl10 card">
+               <?!= include("html_navbar") ?> 
+               <?!= include("html_login") ?> 
+               <?!= include("html_signup") ?>
+               <?!= include("html_home") ?>
+               <?!= include("html_invitation") ?>
+               <?!= include("html_user_info") ?>
+               <?!= include("html_new_approval") ?>
+               <?!= include("html_all_approvals") ?>
+               <?!= include("html_closed_approvals") ?>
+               <?!= include("html_pending_approvals") ?>
+               <?!= include("html_sent_approvals") ?>
+               <?!= include("html_management") ?>
+               <?!= include("html_change_password") ?> 
+               <?!= include("html_footer") ?>
+               <?!= include("html_popups") ?> 
+            </div>
+            <div class="col s0 xl1"></div>
+        </div>
+    </div>
+    
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- production version, optimized for size and speed -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <?!= include("js") ?>
+
+  </body>
+</html>
+
+
+
+
+

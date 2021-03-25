@@ -1,0 +1,75 @@
+<style>
+
+    #app nav{
+        padding:0px 24px;
+    }
+    
+    #app .card{
+        padding: 0px;
+    }
+    
+    #app .home .btn {
+        width: 100%;
+    }
+    
+    #app .file-path-wrapper{
+        padding-left: 0px;
+    }
+    
+    #app table{
+       width: 100%;
+    }
+    
+    #app .modal{
+       height: auto;
+    }
+    [v-cloak] > *{
+        display: none;
+    }
+    
+    
+    [v-cloak] {
+        display: block;
+        padding: 50px 0;
+    }
+
+    [v-cloak]:before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
+        border-radius: 50%;
+        border: 6px solid #eee;
+        border-top-color: #26A69A;
+        animation: spinner 1s linear infinite;
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    
+    @keyframes spinner {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    @media only screen and (max-width: 600px) {
+        #app .btn {
+           width: 100%;
+        }
+        #app .topbtn{
+          margin-bottom: 14px;
+        }
+        #app nav{
+            padding: 0px;
+        }
+    }
+</style>
+
+
+
+
