@@ -1,0 +1,99 @@
+<template v-if="currentSession==='manageUsers'">
+    <div class="card-content">
+        <h4 class="teal-text"><b>Manage users ({{Object.keys(users).length}})</b></h4>
+        <table v-if="Object.keys(users).length" class="responsive-table striped">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr v-for="(user, key, index) in users" :key="'user-' + index">
+                   <td>{{user.email === currentUser.email ? 'You': index + 1 }}</td>
+                   <td>{{user.firstname}}</td>
+                   <td>{{user.lastname}}</td>
+                   <td>{{user.email}}</td>
+                   <td :class="user.role === 'admin' || user.role === 'owner' ? 'teal-text text-darken-3': 'grey-text text-darken-3' ">{{user.role}}</td>
+                   <td :class="user.status === 'active' ? 'teal-text text-darken-3': 'grey-text text-darken-3' ">{{user.status}}</td>
+                   <td><button 
+                       v-if="user.role !== 'owner' && user.email !== currentUser.email"
+                       class="btn waves-effect waves-light modal-trigger"
+                       :class="submitting ? 'disabled': '' "
+                       data-target="change-user-role" 
+                       @click="setPopup({
+                           role: user.role,
+                           name: user.firstname + ' ' + user.lastname,
+                           email: user.email, 
+                           title: 'Change role',
+                           callback: changeUserRole,})">
+                           <i class="material-icons">edit</i></button></td>
+                           
+                   <td><button 
+                       v-if="user.role !== 'owner' && user.email !== currentUser.email"
+                       class="btn waves-effect waves-light modal-trigger"
+                       :class="submitting ? 'disabled': '' "
+                       data-target="yes-no-box"
+                       @click="setPopup({
+                           title: 'Delete user',
+                           message: 'Are you sure to remove this user ' + user.firstname + ' ' + user.lastname + '?',
+                           email: user.email,
+                           name: user.firstname + ' ' + user.lastname,
+                           callback: deleteUser,
+                       })"
+                       >
+                       <i class="material-icons">delete</i></button></td>
+               </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template v-if="currentSession==='manageInvitations'">
+    <div class="card-content">
+        <h4 class="teal-text"><b>Manage invitations ({{Object.keys(invitations).length}})</b></h4>
+        <table v-if="Object.keys(users).length" class="responsive-table striped">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Invitation code</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr v-for="(invitation, key, index) in invitations" :key="'invitation-' + index">
+                   <td>{{index + 1 }}</td>
+                   <td>{{invitation.email}}</td>
+                   <td :class="invitation.role !== 'standard' ? 'teal-text text-darken-3' : 'grey-text text-darken-3' ">
+                       {{invitation.role}}</td>
+                   <td>{{invitation.invitation}}</td>
+                   <td :class="invitation.status === 'new' ? 'teal-text text-darken-3' : 'grey-text text-darken-3' ">{{invitation.status}}</td>
+ 
+                   <td><button 
+                       v-if="invitation.role !== 'owner' && invitation.email !== currentUser.email"
+                       class="btn waves-effect waves-light modal-trigger"
+                       :class="submitting ? 'disabled': '' "
+                       data-target="yes-no-box"
+                       @click="setPopup({
+                           title: 'Delete invitation',
+                           message: 'Are you sure to remove this invitation ' + invitation.email +'?',
+                           email: invitation.email,
+                           callback: deleteInvitation,
+                       })"
+                       >
+                       <i class="material-icons">delete</i></button></td>
+               </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+

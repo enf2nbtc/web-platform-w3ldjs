@@ -1,0 +1,46 @@
+<div v-show="currentSession==='newApproval'">
+    <div class="card-content">
+        <h4 class="teal-text"><b>New approval</b></h4>
+        <!-- assign to -->
+        <div class="input-field">
+            <i class="material-icons prefix">assignment_ind</i>
+            <input id="assignto-approval" type="email" class="validate" 
+                v-model="approvalForm.assignTo" :class="submitting ? 'disabled': ''" required>
+            <label for="assignto-approval">Assign to</label>
+        </div>
+        
+        <!-- title -->
+        <div class="input-field">
+            <i class="material-icons prefix">title</i>
+            <input id="title-approval" type="text" class="validate" v-model="approvalForm.title" :class="submitting ? 'disabled': ''" required>
+            <label for="title-approval">Title</label>
+        </div>
+        
+        <!-- description -->
+        <div class="input-field">
+            <i class="material-icons prefix">description</i>
+            <input id="desc-approval" type="text" v-model="approvalForm.description" :class="submitting ? 'disabled': ''" required>
+            <label for="desc-approval">Description</label>
+        </div>
+        
+        <!-- files -->
+        <div class="file-field">
+            <div class="file-path-wrapper input-field">
+                <i class="material-icons prefix">attach_file</i>
+                <input id='files-new-approval' class="file-path" type="text" placeholder="Choose a file" disabled>
+            </div>
+            <input type="file" @change="readFiles" :class="submitting ? 'disabled': ''">
+        </div>
+        
+        <!-- Submit button -->
+        <div class="input-field">
+            <button class="btn waves-effect waves-light modal-trigger"
+                data-target='message-box'
+                @click="createApproval"
+                :class="submitting ? 'disabled': ''">Create
+                <i class="material-icons right">add</i>
+            </button>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,76 @@
+<template v-if="currentSession==='sentApprovals'">
+        <!-- Nav -->
+    <div class="card-content">        
+        <button 
+            @click="goToSession('pendingApprovals')"
+            class="btn waves-effect waves-light topbtn" 
+            :class="(submitting || userPendingApprovals.length < 1) ? 'disabled': ''">
+            Pending approvals ({{userPendingApprovals.length}})
+            <i class="material-icons right">hourglass_empty</i>
+        </button>
+        
+        <button 
+            @click="goToSession('closedApprovals')"
+            class="btn waves-effect waves-light topbtn" 
+            :class="(submitting || userClosedApprovals.length < 1) ? 'disabled': ''">
+            Closed Approvals ({{userClosedApprovals.length}})
+            <i class="material-icons right">done_all</i>
+        </button>
+        
+        <button 
+            @click="goToSession('allApprovals')"
+            class="btn waves-effect waves-light" 
+            :class="(submitting || userAllApprovals.length < 1) ? 'disabled': ''">
+            All approvals ({{userAllApprovals.length}})
+            <i class="material-icons right">inbox</i>
+        </button>
+    </div>
+
+    <div class="divider"></div>
+    
+    <div class="card-content">
+        <h4 class="teal-text"><b>Sent approvals ({{userSentApprovals.length}})</b></h4>
+        <table v-if="userSentApprovals.length" class="responsive-table striped">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Assign to</th>
+                    <!-- <th>Created by</th> -->
+                    <th>Files</th>
+                    <th>Status</th>
+                    <th>Comments</th>
+                    <th>Cancel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(approval, i) in userSentApprovals" :key="'approval-' + i">
+                    <td>{{i + 1}}</td>
+                    <td>{{approval.title}}</td>
+                    <td>{{approval.description}}</td>
+                    <td>{{approval.assignTo}}</td>
+                    <!-- <td>{{approval.createdBy}}</td> -->
+                    <td><p v-for="(file, j) in approval.files" :key="'file-' + i + '-' + j" v-html="file"></p></td>
+                    <td :class="approval.status === 'pending'? 'yellow-text text-darken-3': 
+                        (approval.status === 'rejected' ? 'red-text text-darken-3': 'teal-text text-darken-3')">{{approval.status}}</td>
+                    <td v-html='approval.comments'></td>
+                    <td><button v-if="approval.status === 'pending'"
+                        class="btn waves-effect waves-light modal-trigger"
+                       :class="submitting ? 'disabled': '' "
+                       data-target="yes-no-box"
+                       @click="setPopup({
+                           title: 'Cancel approval request',
+                           approvalTitle: approval.title,
+                           message: 'Are you sure to cancel this approval request ' + approval.title +'?',
+                           uuid: approval.uuid,
+                           callback: cancelApproval,
+                       })"
+                       >
+                       <i class="material-icons">cancel</i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+

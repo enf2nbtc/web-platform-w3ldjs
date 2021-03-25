@@ -1,0 +1,40 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo" @click.prevent='goToSession("home")' v-if="currentUser">
+            <i class="material-icons">home</i>Home</a>
+        <a class="brand-logo" v-else>
+            <i class="material-icons">home</i>Home</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="<?!= getPageUrl('about') ?>">
+                <i class="material-icons left">contact_support</i>About</a></li>
+            
+            <li v-if="currentUser"><a href="#" @click.prevent="goToSession('userInfo')">
+                <i class="material-icons left">account_circle</i>
+                <b>{{users[currentUser.email].firstname}}</b>({{users[currentUser.email].role}})</a></li>
+            <li v-if="currentUser"><a href="#" @click.prevent="logout">
+                <i class="material-icons left">exit_to_app</i>Log out</a></li>
+            <li v-if="currentSession === 'login'"><a href="#" @click.prevent="goToSession('signup')">
+                <i class="material-icons left">forward</i>Sign up</a></li>
+            <li v-if="currentSession === 'signup'"><a href="#" @click.prevent="goToSession('login')">
+                <i class="material-icons left">send</i>Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="<?!= getPageUrl('about') ?>">
+        <i class="material-icons left">contact_support</i>About</a></li>
+    <li v-if="currentUser"><a href="#" @click.prevent="goToSession('userInfo')">
+        <i class="material-icons left">account_circle</i>
+        <b>{{users[currentUser.email].firstname}}</b>({{users[currentUser.email].role}})</a></li>
+    <li v-if="currentUser"><a href="#" @click.prevent="logout">
+        <i class="material-icons left">exit_to_app</i>Log out</a></li>
+    <li v-if="currentSession === 'login'"><a href="#" @click.prevent="goToSession('signup')">
+        <i class="material-icons left">forward</i>Sign up</a></li>
+    <li v-if="currentSession === 'signup'"><a href="#" @click.prevent="goToSession('login')">
+        <i class="material-icons left">send</i>Login</a></li>
+</ul>
+
+
+

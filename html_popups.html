@@ -1,0 +1,118 @@
+<!--Message box-->
+<div id='message-box' class='modal'>
+    <div class="modal-content">
+        <h4>Message box</h4>
+        <div class="input-field">
+            <p v-html="message"></p>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="modal-close waves-effect waves btn"
+          :class="submitting ? 'disabled': '' ">
+          Close<i class="material-icons right">close</i></button>
+    </div>
+</div>
+
+<!--Confirm box-->
+<div id='yes-no-box' class='modal'>
+    <div class="modal-content">
+        <h4>{{popupData.title}}</h4>
+        <div class="input-field">
+            <p>{{popupData.message}}</p>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="modal-close waves-effect waves btn btntop modal-trigger" 
+          v-if="popupData.callback"
+          data-target='message-box'
+          @click="popupData.callback">
+          Yes<i class="material-icons right">check</i></button>
+      <button class="modal-close waves-effect waves btn">
+          No<i class="material-icons right">close</i></button>
+    </div>
+</div>
+
+<!--Change user role-->
+<div id='change-user-role' class='modal'>
+    <div class="modal-content">
+        <h4>{{popupData.title}}</h4>
+        
+        <div class="input-field">
+            <input id='popup-name' type="text" placeholder="name" :value="popupData.name" disabled>
+            <label for="user-name" class="active">Name</label>
+        </div>
+        
+        <div class="input-field">
+            <select v-model='popupData.role' :class="submitting ? 'disabled': '' ">
+                <option value="" disabled selected>Choose a role</option>
+                <option value="admin">Admin</option>
+                <option value="standard">Standard</option>
+            </select>
+            <label>Role</label>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="modal-close waves-effect waves btn btntop modal-trigger" 
+          :class="submitting ? 'disabled': '' "
+          v-if="popupData.callback"
+          data-target='message-box'
+          @click="popupData.callback">
+          Yes<i class="material-icons right">check</i></button>
+      <button class="modal-close waves-effect waves btn"
+          :class="submitting ? 'disabled': '' ">
+          Cancel<i class="material-icons right">cancel</i></button>
+    </div>
+</div>
+
+<!--Approve/Reject-->
+<div id='approve-reject-request' class='modal'>
+    <div class="modal-content">
+        <h4>{{popupData.action}}</h4>
+        <div>
+          <div class="input-field">
+              <i class="material-icons prefix">title</i>
+              <input id="request-app" type="text" placeholder='request' :value='popupData.request' disabled>
+              <label for="request-app" class="active">Title</label>
+          </div>
+          
+          <div class="input-field">
+              <i class="material-icons prefix">description</i>
+              <input id="desc-app" type="text" placeholder='description' :value='popupData.description' disabled>
+              <label for="desc-app" class="active">Description</label>
+          </div>
+          
+          <div class="input-field">
+              <i class="material-icons prefix">call_to_action</i>
+              <input id="action-app" type="text" placeholder='action' :value='popupData.action' disabled>
+              <label for="action-app" class="active">Action</label>
+          </div>
+          
+          <div class="input-field" v-if="popupData.email !== undefined">
+              <i class="material-icons prefix">mail</i>
+              <label id="email-app">Reassign to</label>
+              <input id="email-app" type="email" v-model='popupData.email' class="validate" :disabled="submitting ? true: false">
+          </div>
+          
+          <div class="input-field">
+              <i class="material-icons prefix">comment</i>
+              <label id="comments-app">Comments</label>
+              <input id="comments-app" type="text" v-model='popupData.comments' :disabled="submitting ? true: false">
+          </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="modal-close waves-effect waves btn btntop modal-trigger" 
+          :class="submitting ? 'disabled': '' "
+          v-if="popupData.callback"
+          data-target='message-box'
+          @click="popupData.callback">
+          Yes<i class="material-icons right">check</i></button>
+      <button class="modal-close waves-effect waves btn"
+          :class="submitting ? 'disabled': '' ">
+          Cancel<i class="material-icons right">cancel</i></button>
+    </div>
+</div>

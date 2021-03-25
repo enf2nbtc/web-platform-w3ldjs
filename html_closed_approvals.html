@@ -1,0 +1,61 @@
+<template v-if="currentSession==='closedApprovals'">
+    <div class="card-content">
+        <button 
+            @click="goToSession('pendingApprovals')"
+            class="btn waves-effect waves-light topbtn" 
+            :class="(submitting || userPendingApprovals.length < 1) ? 'disabled': ''">
+            Pending approvals ({{userPendingApprovals.length}})
+            <i class="material-icons right">hourglass_empty</i>
+        </button>
+        
+        <button 
+            @click="goToSession('sentApprovals')"
+            class="btn waves-effect waves-light topbtn" 
+            :class="(submitting || userSentApprovals.length < 1) ? 'disabled': ''">
+            Sent Approvals ({{userSentApprovals.length}})
+            <i class="material-icons right">send</i>
+        </button>
+        
+        <button 
+            @click="goToSession('allApprovals')"
+            class="btn waves-effect waves-light" 
+            :class="(submitting || userAllApprovals.length < 1) ? 'disabled': ''">
+            All approvals ({{userAllApprovals.length}})
+            <i class="material-icons right">inbox</i>
+        </button>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <div class="card-content">
+        <h4 class="teal-text"><b>Closed approvals ({{userClosedApprovals.length}})</b></h4>
+        <table v-if="userClosedApprovals.length" class="responsive-table striped">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Assign to</th>
+                    <th>Created by</th>
+                    <th>Files</th>
+                    <th>Status</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(approval, i) in userClosedApprovals" :key="'approval-' + i">
+                    <td>{{i + 1}}</td>
+                    <td>{{approval.title}}</td>
+                    <td>{{approval.description}}</td>
+                    <td>{{approval.assignTo}}</td>
+                    <td>{{approval.createdBy}}</td>
+                    <td><p v-for="(file, j) in approval.files" :key="'file-' + i + '-' + j" v-html="file"></p></td>
+                    <td :class="approval.status === 'pending'? 'yellow-text text-darken-3': 
+                        (approval.status === 'rejected' ? 'red-text text-darken-3': 'teal-text text-darken-3')">{{approval.status}}</td>
+                    <td v-html='approval.comments'></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+

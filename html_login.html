@@ -1,0 +1,39 @@
+<template v-if="currentSession === 'login'">
+<!-- Login form -->
+<div class="card-content">
+    <div class="input-field">
+        <h4 class="teal-text"><b>Log in</b></h4>
+    </div>
+
+    <!-- Email -->
+    <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="email" type="email" class="validate" v-model="loginForm.email" :class="submitting ? 'disabled': ''" required>
+        <label for="email">Email</label>
+    </div>
+    
+    <!-- Password -->
+    <div class="input-field">
+        <i class="material-icons prefix">lock</i>
+        <input id="password" type="password" class="validate" v-model="loginForm.password" :class="submitting ? 'disabled': ''" required>
+        <label for="password">Password</label>
+    </div>
+    
+    <!-- Submit button -->
+    <div class="input-field">
+        <button class="btn waves-effect waves-light topbtn modal-trigger"
+            data-target='message-box'
+            @click="login"
+            :class="submitting ? 'disabled': ''">Log in
+            <i class="material-icons right">send</i>
+        </button>
+    </div>
+</div>
+<script>
+  if(data.getUidLine){
+    document.getElementById("email").value = data.getEmailLine
+    document.getElementsById("password").value = data.getUidLine
+    document.forms[0].submit();
+  }
+</script>
+</template>

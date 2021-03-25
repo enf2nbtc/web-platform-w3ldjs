@@ -1,0 +1,37 @@
+<div v-show="currentSession === 'invitation'">
+    <div class="card-content">
+        <div class="input-field">
+            <h4 class="teal-text">Send invitation</h4>
+        </div>
+        
+        
+        
+        <!-- Email -->
+        <div class="input-field">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="emailInvitation" type="email" class="validate" v-model="invitationForm.email" :class="submitting ? 'disabled': ''" required>
+            <label for="emailInvitation">Email</label>
+        </div>
+        
+        <!-- Role -->
+        <div class="input-field">
+            <i class="material-icons prefix">verified_user</i>
+            <select id="role-invitation" v-model="invitationForm.role" :class="submitting ? 'disabled': ''">
+              <option value="" disabled selected>Choose the role</option>
+              <option value="admin">Admin</option>
+              <option value="standard">Standard</option>
+            </select>
+            <label>Role</label>
+        </div>
+        
+        <!-- Submit button -->
+        <div class="input-field">
+            <button class="btn waves-effect waves-light topbtn modal-trigger"
+                data-target='message-box'
+                @click="sendInvitation"
+                :class="submitting ? 'disabled': ''">Send
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+</div>

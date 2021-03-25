@@ -1,0 +1,93 @@
+<template v-if="currentSession === 'home'">
+<!-- Home Page-->
+
+<div class="card-content">
+    <h4 class="teal-text"><b>Welcome, {{users[currentUser.email].firstname}} {{users[currentUser.email].lastname}}!</b></h4>
+</div>
+
+
+<div class="divider"></div>
+
+<div class="card-content">
+    <div class="row ">
+        <!-- Standard User-->
+        <div class="home col s12 m6 l6">
+            <div class="input-field">
+                <h5 class="teal-text">Standard</h5>
+            </div>
+            <div class="input-field">
+                <a href="#" class="btn" @click.prevent="goToSession('newApproval')">New approval
+                    <i class="material-icons right">add</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" 
+                    :class="userPendingApprovals.length ? '': 'disabled'"
+                    @click.prevent="goToSession('pendingApprovals')">
+                    Pending approvals ({{userPendingApprovals.length}})
+                    <i class="material-icons right">hourglass_empty</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" 
+                    :class="userSentApprovals.length ? '': 'disabled'"
+                    @click.prevent="goToSession('sentApprovals')">
+                    Sent approvals ({{userSentApprovals.length}})
+                    <i class="material-icons right">send</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" 
+                    :class="userClosedApprovals.length ? '': 'disabled'"
+                    @click.prevent="goToSession('closedApprovals')">
+                    Closed approvals ({{userClosedApprovals.length}})
+                    <i class="material-icons right">done_all</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" 
+                    :class="userAllApprovals.length ? '': 'disabled'"
+                    @click.prevent="goToSession('allApprovals')">
+                    All approvals ({{userAllApprovals.length}})
+                    <i class="material-icons right">inbox</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" @click.prevent="goToSession('userInfo')">Edit Profile
+                    <i class="material-icons right">edit</i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Admin User-->
+        <div class="home col s12 m6 l6" v-if='currentUser.role === "admin" || currentUser.role === "owner"'>
+            <div class="input-field">
+                <h5 class="teal-text">{{currentUser.role === 'admin' ? 'Admin': 'Owner' }}</h5>
+            </div>
+            <div class="input-field">
+                <a href="#" class="btn" @click.prevent="goToSession('invitation')">Send invitation
+                    <i class="material-icons right">mail</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" @click.prevent="goToSession('manageInvitations')">Manage invitations ({{Object.keys(invitations).length}})
+                    <i class="material-icons right">archive</i>
+                </a>
+            </div>
+            
+            <div class="input-field">
+                <a href="#" class="btn" @click.prevent="goToSession('manageUsers')">Manage Users ({{Object.keys(users).length}})
+                    <i class="material-icons right">people</i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+

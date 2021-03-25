@@ -1,0 +1,70 @@
+<!-- Signup form -->
+<template v-if="currentSession === 'signup'">
+
+<div class="card-content">
+    <div class="input-field">
+        <h4 class="teal-text">Sign up</h4>
+    </div>
+    
+    <!-- Email -->
+    <div class="input-field">
+        <i class="material-icons prefix">mail</i>
+        <input id="emailSignup" type="email" class="validate" v-model="signupForm.email" @change="checkInvitation" :class="submitting ? 'disabled': ''" required>
+        <label for="emailSignup">Email</label>
+    </div>
+    
+    <!-- Invitation Code -->
+    <div class="input-field">
+        <i class="material-icons prefix">vpn_key</i>
+        <input id="invitation" type="text" class="validate" v-model="signupForm.invitation" @change="checkInvitation" :class="submitting ? 'disabled': ''" required>
+        <label for="invitation">Invitation code</label>
+    </div>
+    
+    <!-- Role -->
+    <div class="input-field">
+        <i class="material-icons prefix">verified_user</i>
+        <input placeholder="Role is not editable" id="role" type="text" class="validate" v-model="signupForm.role" disabled>
+        <!-- <label for="role">Role</label> -->
+    </div>
+    
+    <!-- First name -->
+    <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="fname" type="text" class="validate" v-model="signupForm.firstname" :class="submitting ? 'disabled': ''" required>
+        <label for="fname">First name</label>
+    </div>
+    
+    <!-- Last name -->
+    <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="lname" type="text" class="validate" v-model="signupForm.lastname" :class="submitting ? 'disabled': ''" required>
+        <label for="lname">Last name</label>
+    </div>
+    
+    <!-- Password -->
+    <div class="input-field">
+        <i class="material-icons prefix">lock</i>
+        <input id="passwordSignup" type="password" class="validate" v-model="signupForm.password" :class="submitting ? 'disabled': ''" required>
+        <label for="passwordSignup">Password</label>
+    </div>
+    
+    <!-- Password confirmed -->
+    <div class="input-field">
+        <i class="material-icons prefix">lock</i>
+        <input id="passwordConfirmed" type="password" class="validate" v-model="signupForm.passwordConfirmed" :class="submitting ? 'disabled': ''" required>
+        <label for="passwordConfirmed">Confirm password</label>
+    </div>
+    
+    <!-- Submit button -->
+    <div class="input-field">
+        <button class="btn waves-effect waves-light modal-trigger" 
+            :class="submitting ? 'disabled': ''"
+            data-target='message-box'
+            @click="signup">Sign up
+          <i class="material-icons right">forward</i>
+        </button>
+    </div>
+    
+</div>
+</template>
+

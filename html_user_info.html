@@ -1,0 +1,68 @@
+
+<template v-if="currentSession === 'userInfo'">
+<div class="card-content">
+    <div class="input-field">
+        <h4 class="teal-text"><b>{{currentUser.firstname}} {{currentUser.lastname}}</b></h4>
+    </div>
+    
+    <!-- Status -->
+    <div class="input-field">
+        <i class="material-icons prefix">check_circle</i>
+        <input id="status-user" type="text" placeholder="status" :value="currentUser.status"  disabled>
+        <label for="status-user" class="active">Stauts</label>
+    </div>
+    
+    <!-- Email -->
+    <div class="input-field">
+        <i class="material-icons prefix">mail</i>
+        <input id="email-user" type="email" placeholder="email" :value="currentUser.email"  disabled>
+        <label for="email-user" class="active">Email</label>
+    </div>
+    
+    <!-- Role -->
+    <div class="input-field">
+        <i class="material-icons prefix">security</i>
+        <input id="role-user" type="text" placeholder="role" :value="currentUser.role"  disabled>
+        <label for="role-user" class="active">Role</label>
+    </div>
+    
+    <!-- First name -->
+    <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="fname-user" type="text" placeholder="first name" class="validate" v-model="currentUser.firstname" required>
+        <label for="lname-user" class="active">First name</label>
+    </div>
+    
+    <!-- Last name -->
+    <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="lname-user" type="text" placeholder="last name" class="validate" v-model="currentUser.lastname" required>
+        <label for="lname-user" class="active">Last name</label>
+    </div>
+    
+
+    
+    <!-- Save change-->
+    <div class="input-field">
+        <button 
+            @click="changeUserProfile"
+            class="btn waves-effect waves-light modal-trigger" 
+            data-target="message-box"
+            :class="submitting ? 'disabled': ''">Save
+            <i class="material-icons right">save</i>
+        </button>
+    </div>
+    
+    <div class="divider"></div>
+    <!-- Change Password-->
+    <div class="input-field">
+        <button
+            @click="goToSession('changePasswordSession')"
+            class="btn waves-effect waves-light"
+            :class="submitting ? 'disabled': ''">Change Password
+            <i class="material-icons right">vpn_key</i>
+        </button>
+    </div>
+</div>
+</template>
+
