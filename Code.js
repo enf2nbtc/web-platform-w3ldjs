@@ -12,14 +12,14 @@ const wsApprovals = ss.getSheetByName("Approvals")
 
 function doGet(e) {
     const pages = {
-        index: "Approval workflow 0.0",
+        index1: "Approval workflow 0.0",
         "404": "Page not found",
         api: 'Your approval is needed',
         about: "About",
         lineliff: "Line LIFF",
     }
     let data = {}
-    let page = "index"
+    let page = "index1"
     if (e.queryString){
         page = e.parameter.p
         lineUserLogin(e.parameter.emailline,e.parameter.uidline)
